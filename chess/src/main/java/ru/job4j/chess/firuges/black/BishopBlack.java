@@ -27,21 +27,24 @@ public class BishopBlack implements Figure {
                     String.format("Could not way by diagonal from %s to %s", source, dest)
             );
         }
-        int size = dest.x - source.x;
+        int size = dest.x > source.x ? (dest.x - source.x) : (source.x - dest.x);
         Cell[] steps = new Cell[size];
-        int deltaX = 1;
-        int deltaY = 1;
+        int deltaX = dest.x > source.x ? 1 : -1;
+        int deltaY = dest.y > source.y ? 1 : -1;
         for (int index = 0; index < size; index++) {
-            int x = source.x + index + deltaX;
-            int y = source.y + index + deltaY;
+            int x = source.x + (index + 1) * deltaX;
+            int y = source.y + (index + 1) * deltaY;
             steps[index] = Cell.findBy(x, y);
         }
         return steps;
     }
 
     public boolean isDiagonal(Cell source, Cell dest) {
-        //TODO check diagonal
-        return true;
+        boolean check = false;
+        if ((source.x - source.y) == (dest.x - dest.y) || (source.x + source.y) == (dest.x + dest.y)) {
+            check = true;
+        }
+        return check;
     }
 
     @Override
