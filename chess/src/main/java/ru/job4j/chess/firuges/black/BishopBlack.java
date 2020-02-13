@@ -27,7 +27,7 @@ public class BishopBlack implements Figure {
                     String.format("Could not way by diagonal from %s to %s", source, dest)
             );
         }
-        int size = dest.x > source.x ? (dest.x - source.x) : (source.x - dest.x);
+        int size = Math.abs(dest.x - source.x);
         Cell[] steps = new Cell[size];
         int deltaX = dest.x > source.x ? 1 : -1;
         int deltaY = dest.y > source.y ? 1 : -1;
@@ -41,7 +41,7 @@ public class BishopBlack implements Figure {
 
     public boolean isDiagonal(Cell source, Cell dest) {
         boolean check = false;
-        if ((source.x - source.y) == (dest.x - dest.y) || (source.x + source.y) == (dest.x + dest.y)) {
+        if (Math.abs(source.x - dest.x) == Math.abs(source.y - dest.y)) {
             check = true;
         }
         return check;
