@@ -21,7 +21,7 @@ public class Logic {
     }
 
     public boolean move(Cell source, Cell dest) {
-        boolean rst = false;
+        boolean rst = true;
         int index = this.findBy(source);
         if (index != -1) {
             Cell[] steps = this.figures[index].way(source, dest);
@@ -31,9 +31,10 @@ public class Logic {
                         rst = false;
                         break;
                     }
-                    rst = true;
                 }
-                this.figures[index] = this.figures[index].copy(dest);
+                if (rst) {
+                    this.figures[index] = this.figures[index].copy(dest);
+                }
             }
         }
         return rst;
